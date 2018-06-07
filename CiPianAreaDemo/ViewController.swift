@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-//    var allData = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]],["type":"6","items":[""]]]
+    //    var allData = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]],["type":"6","items":[""]]]
     
     var allData1 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]]]
     var allData2 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]]]
@@ -133,7 +133,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
                     height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum) + 35
                 }
             }
-           
+            
             if favorableZoneTypeNum > 0 {
                 height += CGFloat(54)
             }
@@ -141,7 +141,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             if optimizationTypeNum > 0 {
                 height += CGFloat(54)
             }
-
+            
             return height - 10
             
         }else if indexPath.section == 0{

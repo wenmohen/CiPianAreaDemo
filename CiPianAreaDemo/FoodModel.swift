@@ -27,7 +27,7 @@ enum HomeActivityCellType: String {
     case otherAdvertOne = "5"
     //一行一栏，某个店热卖推荐
     case otherRecommendedOne = "6"
-   
+    
     init(value: Int) {
         switch value {
         case 1:
@@ -44,5 +44,5 @@ enum HomeActivityCellType: String {
             self = .otherRecommendedOne
         }
     }
-
+    
 }

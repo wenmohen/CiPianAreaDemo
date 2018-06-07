@@ -21,7 +21,6 @@ class ActivityFoodView: UIView {
      */
     override func draw(_ rect: CGRect) {
         // Drawing code
-        setupView()
     }
     
     @IBAction func didButtonTouchUpInside(_ sender: Any) {
@@ -30,7 +29,7 @@ class ActivityFoodView: UIView {
 }
 
 extension ActivityFoodView {
-    
+    //这种方式主要用于此自定义的xib view可以直接在Stroyboard中使用
     func loadViewFromNib() {
         guard let view = UINib.init(nibName: "ActivityFoodView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).last as? UIView else {
             return
@@ -39,6 +38,7 @@ extension ActivityFoodView {
         self.myView.frame = bounds
         self.myView.frame.size.width = (UIScreen.main.bounds.width - 20) / 3
         addSubview(self.myView)
+        setupView()
     }
     
     func setupView() {
