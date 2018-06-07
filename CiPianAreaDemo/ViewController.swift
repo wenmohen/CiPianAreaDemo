@@ -77,7 +77,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             }
             
             if twoSelectArr.count > 0 && twoSelectRecommendedArr.count > 0 {
-                height += CGFloat(10)
+                height += CGFloat(10 * 4)
             }
             
             if twoSelectArr.count > 0 {
@@ -93,17 +93,14 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             }
             
             if oneArr.count > 0 {
-                //            let itemWidth = width
-                //            let itemHeight = itemWidth / 375 * 238
                 let itemHeight = CGFloat( 238 )
                 height += itemHeight + CGFloat(30)
             }
             
             if oneAdvertArr.count > 0 {
-                //            let itemWidth = width
-                //            let itemHeight = itemWidth / 375 * 238
-                let itemHeight = CGFloat( 90 )
-                height += itemHeight + CGFloat(30)
+                let itemWidth = width
+                let itemHeight = itemWidth / 375 * 90
+                height += itemHeight + CGFloat(10)
             }
             return height
             

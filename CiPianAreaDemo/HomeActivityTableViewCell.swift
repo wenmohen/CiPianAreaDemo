@@ -48,6 +48,8 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             }else {
                 headView.titleLabel.text = ""
             }
+            headView.moreButton.isHidden = indexPath.section == 2 ? false : true
+            
             return headView
         }
         return UICollectionReusableView()
@@ -65,7 +67,7 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 3:
             return CGSize(width: 0, height: 0)
         case 4:
-            return CGSize(width: width, height: 20)
+            return CGSize(width: width, height: 0)
         default:
             return CGSize(width: width, height: 20)
         }
@@ -81,7 +83,7 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 3:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         case 4:
-            return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         default:
             return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         }
@@ -108,11 +110,12 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return CGSize(width: itemWidth, height: itemHeight)
         case 4:
             let itemWidth = width
-            let itemHeight = CGFloat (238)
+            let itemHeight = itemWidth / 375 * 90
+//            let itemHeight = CGFloat (90)
             return CGSize(width: itemWidth, height: itemHeight)
         default:
             let itemWidth = width
-            let itemHeight = CGFloat (90)
+            let itemHeight = CGFloat (238)
             return CGSize(width: itemWidth, height: itemHeight)
         }
     }
@@ -145,9 +148,9 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 3:
             return cellForActivitySelectTwo(indexPath: indexPath)
         case 4:
-            return cellForActivityOne(indexPath: indexPath)
-        default:
             return cellForActivityOneAdvert(indexPath: indexPath)
+        default:
+            return cellForActivityOne(indexPath: indexPath)
         }
         
     }
@@ -234,9 +237,10 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivitySelectTwoRecommendedCollectionViewCell", for: indexPath) as? ActivitySelectTwoRecommendedCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.shopImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image1") : #imageLiteral(resourceName: "icon_image2")
-        cell.shopSmallImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image1") : #imageLiteral(resourceName: "icon_image2")
+        cell.foodImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image1") : #imageLiteral(resourceName: "icon_image2")
+        cell.shopSmallImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image9") : #imageLiteral(resourceName: "icon_image10")
         cell.shopSmallImageView.layer.cornerRadius = 5
+        cell.shopSmallImageView.layer.masksToBounds = true
         return cell
     }
 }
@@ -292,7 +296,7 @@ class ActivitySelectTwoCollectionViewCell: UICollectionViewCell {
 
 /// 瓷片区-每行两栏(推荐)（为你优选）
 class ActivitySelectTwoRecommendedCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var shopImageView: UIImageView!
+    @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var shopSmallImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!

@@ -353,7 +353,7 @@
                                                             </constraints>
                                                             <size key="customSize" width="172" height="137"/>
                                                             <connections>
-                                                                <outlet property="shopImageView" destination="BJb-Sq-c9o" id="3Ns-3a-8DQ"/>
+                                                                <outlet property="foodImageView" destination="BJb-Sq-c9o" id="U9e-De-eUg"/>
                                                                 <outlet property="shopSmallImageView" destination="0jf-G3-uni" id="luE-BG-ica"/>
                                                                 <outlet property="subTitleLabel" destination="LQn-Yt-VBH" id="ZWl-RI-mak"/>
                                                                 <outlet property="titleLabel" destination="WMR-os-KeM" id="bat-rz-5eD"/>
@@ -573,7 +573,9 @@
                                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="Acf-Px-jjK"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                        <state key="normal" title="更多 &gt;">
+                                                                        <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                        <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                        <state key="normal" title="更多" image="icon_ arrow_right">
                                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                     </button>
@@ -596,6 +598,7 @@
                                                             <constraint firstAttribute="trailing" secondItem="R4c-b4-ZtF" secondAttribute="trailing" id="hwv-VS-bCe"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="moreButton" destination="CIS-Yn-9zi" id="LAk-OQ-tUg"/>
                                                             <outlet property="titleLabel" destination="CVi-pW-WD6" id="1iT-aD-e2g"/>
                                                         </connections>
                                                     </collectionReusableView>
@@ -663,6 +666,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_ arrow_right" width="24" height="24"/>
         <image name="icon_image1" width="245" height="184"/>
         <image name="icon_image_one_advert" width="33" height="39"/>
         <image name="icon_image_one_goBuy" width="62" height="19"/>
