@@ -13,8 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var oneArr = [""]
+    var oneAdvertArr = [""]
     var twoArr = ["",""]
     var twoSelectArr = ["",""]
+    var twoSelectRecommendedArr = ["",""]
     var fourArr = ["","","",""]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,15 +72,37 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
                 height += CGFloat(10)
             }
             
+            if twoSelectArr.count > 0 || twoSelectRecommendedArr.count > 0 {
+                height += CGFloat(64)
+            }
+            
+            if twoSelectArr.count > 0 && twoSelectRecommendedArr.count > 0 {
+                height += CGFloat(10)
+            }
+            
             if twoSelectArr.count > 0 {
                 let itemWidth = (width - 20  - 22)/2
                 let itemHeight = itemWidth / 172 * 119
-                height += itemHeight + CGFloat(64)
+                height += itemHeight * 2
             }
+            
+            if twoSelectRecommendedArr.count > 0 {
+                let itemWidth = (width - 20  - 22)/2
+                let itemHeight = itemWidth / 172 * 137
+                height += itemHeight
+            }
+            
             if oneArr.count > 0 {
                 //            let itemWidth = width
                 //            let itemHeight = itemWidth / 375 * 238
                 let itemHeight = CGFloat( 238 )
+                height += itemHeight + CGFloat(30)
+            }
+            
+            if oneAdvertArr.count > 0 {
+                //            let itemWidth = width
+                //            let itemHeight = itemWidth / 375 * 238
+                let itemHeight = CGFloat( 90 )
                 height += itemHeight + CGFloat(30)
             }
             return height

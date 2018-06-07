@@ -62,6 +62,10 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return CGSize(width: 0, height: 0)
         case 2:
             return CGSize(width: width, height: 54)
+        case 3:
+            return CGSize(width: 0, height: 0)
+        case 4:
+            return CGSize(width: width, height: 20)
         default:
             return CGSize(width: width, height: 20)
         }
@@ -73,6 +77,10 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 1:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         case 2:
+            return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        case 3:
+            return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        case 4:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         default:
             return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
@@ -92,12 +100,19 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return CGSize(width: itemWidth, height: itemHeight)
         case 2:
             let itemWidth = (width - 20  - 15)/2
+            let itemHeight = itemWidth / 172 * 137
+            return CGSize(width: itemWidth, height: itemHeight)
+        case 3:
+            let itemWidth = (width - 20  - 15)/2
             let itemHeight = itemWidth / 172 * 119
+            return CGSize(width: itemWidth, height: itemHeight)
+        case 4:
+            let itemWidth = width
+            let itemHeight = CGFloat (238)
             return CGSize(width: itemWidth, height: itemHeight)
         default:
             let itemWidth = width
-            //            let itemHeight = itemWidth / 375 * 238
-            let itemHeight = CGFloat (238)
+            let itemHeight = CGFloat (90)
             return CGSize(width: itemWidth, height: itemHeight)
         }
     }
@@ -109,13 +124,15 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 1:
             return 4
         case 2:
+            return 4
+        case 3:
             return 2
         default:
             return 1
         }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 6
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
@@ -124,9 +141,13 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         case 1:
             return cellForActivityFour(indexPath: indexPath)
         case 2:
+            return cellForActivitySelectTwoRecommended(indexPath: indexPath)
+        case 3:
             return cellForActivitySelectTwo(indexPath: indexPath)
-        default:
+        case 4:
             return cellForActivityOne(indexPath: indexPath)
+        default:
+            return cellForActivityOneAdvert(indexPath: indexPath)
         }
         
     }
@@ -153,6 +174,19 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         
         return cell
     }
+    
+    /// 瓷片区-每行一栏（广告）
+    ///
+    /// - Parameter indexPath: indexPath
+    /// - Returns: cell
+    func cellForActivityOneAdvert(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneAdvertCollectionViewCell", for: indexPath) as? ActivityOneAdvertCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.bgImageView.image = #imageLiteral(resourceName: "img_ Placeholder6")
+        return cell
+    }
+    
     
     /// 瓷片区-每行两栏（优惠专区）
     ///
@@ -192,12 +226,26 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         cell.whiteContentView.layer.cornerRadius = 5
         return cell
     }
+    /// 瓷片区-每行两栏（为你优选）（推荐）
+    ///
+    /// - Parameter indexPath: indexPath
+    /// - Returns: cell
+    func cellForActivitySelectTwoRecommended(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivitySelectTwoRecommendedCollectionViewCell", for: indexPath) as? ActivitySelectTwoRecommendedCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.shopImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image1") : #imageLiteral(resourceName: "icon_image2")
+        cell.shopSmallImageView.image = indexPath.row == 0 ? #imageLiteral(resourceName: "icon_image1") : #imageLiteral(resourceName: "icon_image2")
+        cell.shopSmallImageView.layer.cornerRadius = 5
+        return cell
+    }
 }
 
 ///MARK:--collectionViewCell及组头
 /// 组头
 class ActivityHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var moreButton: UIButton!
 }
 
 /// 瓷片区-每行一栏
@@ -217,6 +265,10 @@ class ActivityOneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var foodView2: ActivityFoodView!
     @IBOutlet weak var foodView3: ActivityFoodView!
 }
+/// 瓷片区-每行一栏（广告、内容暂定）
+class ActivityOneAdvertCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var bgImageView: UIImageView!
+}
 /// 瓷片区-每行两栏（优惠专区）
 class ActivityTwoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
@@ -230,10 +282,18 @@ class ActivityFourCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
 }
-/// 瓷片区-每行两栏（为你优选）
+/// 瓷片区-每行两栏（评价高）（为你优选）
 class ActivitySelectTwoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var whiteContentView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+}
+
+/// 瓷片区-每行两栏(推荐)（为你优选）
+class ActivitySelectTwoRecommendedCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var shopImageView: UIImageView!
+    @IBOutlet weak var shopSmallImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
 }
