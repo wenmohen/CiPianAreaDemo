@@ -14,9 +14,21 @@ class HomeActivityTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    var allData = [[String:Any]]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    //优惠专区cell种类类型个数
+    var favorableZoneTypeNum = 0
+    //为你优选cell种类类型个数
+    var optimizationTypeNum = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setupCollectionView() 
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,7 +43,7 @@ extension HomeActivityTableViewCell {
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionViewFlowLayout.minimumLineSpacing = 0
+        collectionViewFlowLayout.minimumLineSpacing = 10
         collectionViewFlowLayout.minimumInteritemSpacing = 0
     }
 }
@@ -43,13 +55,22 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             guard let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ActivityHeaderCollectionReusableView", for: indexPath) as? ActivityHeaderCollectionReusableView else {
                 return UICollectionReusableView()
             }
-            if indexPath.section == 0 || indexPath.section == 2 {
-                headView.titleLabel.text = indexPath.section == 0 ? "优惠专区" : "为你优选"
-            }else {
+            guard let type = allData[indexPath.section]["type"] as? String else {
+                return UICollectionReusableView()
+            }
+            let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+            
+            switch cellType {
+            case .favorableZoneTwo:
+                headView.titleLabel.text = "优惠专区"
+            case .optimizationRecommendedTwo:
+                headView.titleLabel.text = "为你优选"
+            case  .optimizationSelectTwo:
+                headView.titleLabel.text = optimizationTypeNum == 1 ? "为你优选" : ""
+            default:
                 headView.titleLabel.text = ""
             }
-            headView.moreButton.isHidden = indexPath.section == 2 ? false : true
-            
+            headView.moreButton.isHidden = cellType == .optimizationRecommendedTwo ? false : true
             return headView
         }
         return UICollectionReusableView()
@@ -57,61 +78,73 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = UIScreen.main.bounds.width
-        switch section {
-        case 0:
+        guard let type = allData[section]["type"] as? String else {
+            return CGSize.zero
+        }
+        let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+        switch cellType {
+        case .favorableZoneTwo:
             return CGSize(width: width, height: 54)
-        case 1:
-            return CGSize(width: 0, height: 0)
-        case 2:
+        case .favorableZoneFour:
+            return favorableZoneTypeNum == 1 ? CGSize(width: width, height: 54) : CGSize(width: 0, height: 0)
+        case .optimizationRecommendedTwo:
             return CGSize(width: width, height: 54)
-        case 3:
+        case .optimizationSelectTwo:
+            return optimizationTypeNum == 1 ? CGSize(width: width, height: 54) : CGSize(width: 0, height: 0)
+        case .otherAdvertOne:
             return CGSize(width: 0, height: 0)
-        case 4:
-            return CGSize(width: width, height: 0)
         default:
-            return CGSize(width: width, height: 20)
+            return CGSize(width: 0, height: 0)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        switch section {
-        case 0:
+        guard let type = allData[section]["type"] as? String else {
+            return UIEdgeInsets.zero
+        }
+        let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+        switch cellType {
+        case .favorableZoneTwo:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        case 1:
+        case .favorableZoneFour:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        case 2:
+        case .optimizationRecommendedTwo:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        case 3:
+        case .optimizationSelectTwo:
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        case 4:
+        case .otherAdvertOne:
             return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         default:
-            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+            return UIEdgeInsets(top: 35, left: 0, bottom: 0, right: 0)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width
-        switch indexPath.section {
-        case 0:
+        guard let type = allData[indexPath.section]["type"] as? String else {
+            return CGSize.zero
+        }
+        let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+        switch cellType {
+        case .favorableZoneTwo:
             let itemWidth = (width - 20 - 10)/2
             let itemHeight = itemWidth / 175 * 110
             return CGSize(width: itemWidth, height: itemHeight)
-        case 1:
+        case .favorableZoneFour:
             let itemWidth = (width - 20  - 10 * 3)/4
             let itemHeight = itemWidth / 85 * 110
             return CGSize(width: itemWidth, height: itemHeight)
-        case 2:
+        case .optimizationRecommendedTwo:
             let itemWidth = (width - 20  - 15)/2
             let itemHeight = itemWidth / 172 * 137
             return CGSize(width: itemWidth, height: itemHeight)
-        case 3:
+        case .optimizationSelectTwo:
             let itemWidth = (width - 20  - 15)/2
             let itemHeight = itemWidth / 172 * 119
             return CGSize(width: itemWidth, height: itemHeight)
-        case 4:
+        case .otherAdvertOne:
             let itemWidth = width
             let itemHeight = itemWidth / 375 * 90
-//            let itemHeight = CGFloat (90)
+            //            let itemHeight = CGFloat (90)
             return CGSize(width: itemWidth, height: itemHeight)
         default:
             let itemWidth = width
@@ -121,38 +154,33 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 2
-        case 1:
-            return 4
-        case 2:
-            return 4
-        case 3:
-            return 2
-        default:
-            return 1
+        guard let items = allData[section]["items"] as? [String] else {
+            return 0
         }
+        return items.count
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 6
+        return allData.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
+        guard let type = allData[indexPath.section]["type"] as? String else {
+            return UICollectionViewCell()
+        }
+        let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+        switch cellType {
+        case .favorableZoneTwo:
             return cellForActivityTwo(indexPath: indexPath)
-        case 1:
+        case .favorableZoneFour:
             return cellForActivityFour(indexPath: indexPath)
-        case 2:
+        case .optimizationRecommendedTwo:
             return cellForActivitySelectTwoRecommended(indexPath: indexPath)
-        case 3:
+        case .optimizationSelectTwo:
             return cellForActivitySelectTwo(indexPath: indexPath)
-        case 4:
+        case .otherAdvertOne:
             return cellForActivityOneAdvert(indexPath: indexPath)
         default:
             return cellForActivityOne(indexPath: indexPath)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -171,10 +199,9 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         cell.shopImageView.layer.cornerRadius = cell.shopImageView.bounds.height / 2
         cell.shopGrayBgView.layer.cornerRadius = 20
         var images = [#imageLiteral(resourceName: "icon_image1"),#imageLiteral(resourceName: "icon_image2"),#imageLiteral(resourceName: "icon_image3")]
-        cell.foodView1.setupFoodModel(image: images[indexPath.row])
-        cell.foodView2.setupFoodModel(image: images[indexPath.row])
-        cell.foodView3.setupFoodModel(image: images[indexPath.row])
-        
+        cell.foodView1.setupFoodModel(image: images[0])
+        cell.foodView2.setupFoodModel(image: images[1])
+        cell.foodView3.setupFoodModel(image: images[2])
         return cell
     }
     
@@ -200,7 +227,7 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return UICollectionViewCell()
         }
         var images = [#imageLiteral(resourceName: "icon_image5"),#imageLiteral(resourceName: "icon_image6")]
-        cell.bgImageView.image = images[indexPath.row]
+        cell.bgImageView.image = indexPath.row < images.count ?  images[indexPath.row] : #imageLiteral(resourceName: "icon_image5")
         cell.leftTopButton.layer.cornerRadius = 6
         cell.leftTopButton.backgroundColor = indexPath.row == 0 ? .red : .orange
         return cell
@@ -214,7 +241,7 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return UICollectionViewCell()
         }
         var images = [#imageLiteral(resourceName: "icon_image_four1"),#imageLiteral(resourceName: "icon_image_four2"),#imageLiteral(resourceName: "icon_image_four3"),#imageLiteral(resourceName: "icon_image_four4")]
-        cell.bgImageView.image = images[indexPath.row]
+        cell.bgImageView.image = indexPath.row < images.count ?  images[indexPath.row] : #imageLiteral(resourceName: "icon_image_four1")
         return cell
     }
     /// 瓷片区-每行两栏（为你优选）

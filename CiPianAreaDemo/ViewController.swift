@@ -12,16 +12,24 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var oneArr = [""]
-    var oneAdvertArr = [""]
-    var twoArr = ["",""]
-    var twoSelectArr = ["",""]
-    var twoSelectRecommendedArr = ["",""]
-    var fourArr = ["","","",""]
+//    var allData = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]],["type":"6","items":[""]]]
+    
+    var allData1 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]]]
+    var allData2 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]]]
+    var allData3 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]]]
+    var allData4 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]]]
+    var allData = [[String:Any]]()
+    
+    //优惠专区cell种类类型个数
+    var favorableZoneTypeNum = 0
+    //为你优选cell种类类型个数
+    var optimizationTypeNum = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupTableView()
+        loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,6 +37,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didRefreshButtonTouchUpInside(_ sender: Any) {
+        loadData()
+    }
     
 }
 
@@ -37,6 +48,35 @@ extension ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+    }
+    
+    func loadData() {
+        //瓷片区cell类型不确定，此随机显示
+        var data = [allData1,allData2,allData3,allData4]
+        let row = Int( Int (arc4random()) % data.count )
+        allData = row > data.count - 1 ? data[0] : data[row]
+        favorableZoneTypeNum = 0
+        optimizationTypeNum = 0
+        for i in 0..<allData.count {
+            guard let type = allData[i]["type"] as? String else {
+                return
+            }
+            let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+            switch cellType {
+            case .favorableZoneTwo:
+                favorableZoneTypeNum += 1
+            case .favorableZoneFour:
+                favorableZoneTypeNum += 1
+            case .optimizationRecommendedTwo:
+                optimizationTypeNum += 1
+            case .optimizationSelectTwo:
+                optimizationTypeNum += 1
+            default:
+                break
+            }
+        }
+        
+        tableView.reloadData()
     }
 }
 
@@ -53,56 +93,56 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 1 {
             var height: CGFloat = 0
             let width = UIScreen.main.bounds.width
-            if twoArr.count >= 2 {
-                let itemWidth = (width - 20 - 10)/2
-                let itemHeight = itemWidth / 175 * 110
-                height += itemHeight
+            for i in 0..<allData.count {
+                guard let type = allData[i]["type"] as? String else {
+                    return height
+                }
+                guard let items = allData[i]["items"] as? [String] else {
+                    return height
+                }
+                let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+                switch cellType {
+                case .favorableZoneTwo:
+                    let itemWidth = (width - 20 - 10)/2
+                    let itemHeight = itemWidth / 175 * 110
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 2)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
+                case .favorableZoneFour:
+                    let itemWidth = (width - 20  - 10 * 3)/4
+                    let itemHeight = itemWidth / 85 * 110
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 4)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
+                case .optimizationRecommendedTwo:
+                    let itemWidth = (width - 20  - 15)/2
+                    let itemHeight = itemWidth / 172 * 137
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 2)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
+                case .optimizationSelectTwo:
+                    let itemWidth = (width - 20  - 15)/2
+                    let itemHeight = itemWidth / 172 * 119
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 2)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
+                case .otherAdvertOne:
+                    let itemWidth = width
+                    let itemHeight = itemWidth / 375 * 90
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 1)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
+                default:
+                    let itemHeight = CGFloat( 238 )
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 1)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum) + 35
+                }
             }
-            if fourArr.count >= 4 {
-                let itemWidth = (width - 20  - 10 * 3)/4
-                let itemHeight = itemWidth / 85 * 110
-                height += itemHeight
+           
+            if favorableZoneTypeNum > 0 {
+                height += CGFloat(54)
             }
             
-            if twoArr.count >= 2 || fourArr.count >= 4 {
-                height += CGFloat(64)
+            if optimizationTypeNum > 0 {
+                height += CGFloat(54)
             }
-            
-            if twoArr.count >= 2 && fourArr.count >= 4 {
-                height += CGFloat(10)
-            }
-            
-            if twoSelectArr.count > 0 || twoSelectRecommendedArr.count > 0 {
-                height += CGFloat(64)
-            }
-            
-            if twoSelectArr.count > 0 && twoSelectRecommendedArr.count > 0 {
-                height += CGFloat(10 * 4)
-            }
-            
-            if twoSelectArr.count > 0 {
-                let itemWidth = (width - 20  - 22)/2
-                let itemHeight = itemWidth / 172 * 119
-                height += itemHeight * 2
-            }
-            
-            if twoSelectRecommendedArr.count > 0 {
-                let itemWidth = (width - 20  - 22)/2
-                let itemHeight = itemWidth / 172 * 137
-                height += itemHeight
-            }
-            
-            if oneArr.count > 0 {
-                let itemHeight = CGFloat( 238 )
-                height += itemHeight + CGFloat(30)
-            }
-            
-            if oneAdvertArr.count > 0 {
-                let itemWidth = width
-                let itemHeight = itemWidth / 375 * 90
-                height += itemHeight + CGFloat(10)
-            }
-            return height
+
+            return height - 10
             
         }else if indexPath.section == 0{
             return 420 / 667 * view.bounds.height
@@ -118,7 +158,9 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeActivityTableViewCell") as? HomeActivityTableViewCell else {
                 return UITableViewCell()
             }
-            cell.setupCollectionView()
+            cell.favorableZoneTypeNum = favorableZoneTypeNum
+            cell.optimizationTypeNum = optimizationTypeNum
+            cell.allData = allData
             return cell
         }else if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as? HomeTableViewCell else {
@@ -145,5 +187,14 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             //            cell.textLabel?.text = "列表"
             //            return cell
         }
+    }
+}
+
+
+extension ViewController {
+    //计算cell行数
+    func ToCalculateCellLineNum(items: [String], column: Int) -> Int {
+        let lineNum = CGFloat (items.count) > CGFloat(items.count / column) * CGFloat (column) ? (Int(items.count / column) + 1 )  : Int(items.count / column)
+        return lineNum
     }
 }

@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--首页-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CiPianAreaDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-WN-csR">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fXP-gF-XWo">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fXP-gF-XWo">
                                                         <size key="itemSize" width="201" height="126"/>
                                                         <size key="headerReferenceSize" width="375" height="64"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -203,7 +203,7 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivitySelectTwoCollectionViewCell" id="zdm-C5-kAL" customClass="ActivitySelectTwoCollectionViewCell" customModule="CiPianAreaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="193" width="172" height="119"/>
+                                                            <rect key="frame" x="0.0" y="183" width="172" height="119"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="172" height="119"/>
@@ -293,7 +293,7 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivitySelectTwoRecommendedCollectionViewCell" id="pTl-Au-4Ie" customClass="ActivitySelectTwoRecommendedCollectionViewCell" customModule="CiPianAreaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="203" y="184" width="172" height="137"/>
+                                                            <rect key="frame" x="203" y="174" width="172" height="137"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="172" height="137"/>
@@ -360,7 +360,7 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityOneCollectionViewCell" id="klS-pe-C1q" customClass="ActivityOneCollectionViewCell" customModule="CiPianAreaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="331" width="375" height="238"/>
+                                                            <rect key="frame" x="0.0" y="311" width="375" height="238"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="238"/>
@@ -516,7 +516,7 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityOneAdvertCollectionViewCell" id="PW9-9W-m4a" customClass="ActivityOneAdvertCollectionViewCell" customModule="CiPianAreaDemo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="579" width="375" height="90"/>
+                                                            <rect key="frame" x="0.0" y="549" width="375" height="90"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -611,6 +611,7 @@
                                                 <constraint firstItem="jdE-WN-csR" firstAttribute="top" secondItem="MhF-vs-p1c" secondAttribute="top" id="MtH-Xx-dtG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.8928866687" green="0.36166497530000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="collectionView" destination="jdE-WN-csR" id="ixb-FO-WjE"/>
                                             <outlet property="collectionViewFlowLayout" destination="fXP-gF-XWo" id="byG-E0-kom"/>
@@ -636,7 +637,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fXt-6L-jOo"/>
+                    <navigationItem key="navigationItem" title="首页" id="fXt-6L-jOo">
+                        <barButtonItem key="leftBarButtonItem" id="Lt1-gy-ysv"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="vgb-y3-FFA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7YL-yG-EEl">
+                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="刷新"/>
+                                <connections>
+                                    <action selector="didRefreshButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTl-RF-7Rl"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="tableView" destination="sYM-YN-gvp" id="x8k-pb-cj6"/>
@@ -654,6 +667,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gka-MK-HDO">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.66485486366232149" blue="0.18081198258669873" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
