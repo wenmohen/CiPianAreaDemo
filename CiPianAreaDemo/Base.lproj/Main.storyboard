@@ -450,7 +450,7 @@
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOE-4M-KJM">
+                                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOE-4M-KJM">
                                                                                 <rect key="frame" x="301" y="79" width="68" height="20"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="FBL-ll-Qph"/>
@@ -550,6 +550,29 @@
                                                                 <outlet property="bgImageView" destination="Imc-Xw-oMO" id="B0B-ca-mp0"/>
                                                             </connections>
                                                         </collectionViewCell>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityOneGoShopPickupCollectionViewCell" id="d0S-i5-7qh" customClass="ActivityOneGoShopPickupCollectionViewCell" customModule="CiPianAreaDemo" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="639" width="375" height="85"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ok-EMr">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                                                    </scrollView>
+                                                                </subviews>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstItem="zSp-ok-EMr" firstAttribute="leading" secondItem="d0S-i5-7qh" secondAttribute="leading" id="4g6-ue-fyr"/>
+                                                                <constraint firstAttribute="trailing" secondItem="zSp-ok-EMr" secondAttribute="trailing" id="OlY-qO-UDu"/>
+                                                                <constraint firstAttribute="bottom" secondItem="zSp-ok-EMr" secondAttribute="bottom" id="jvR-6h-270"/>
+                                                                <constraint firstItem="zSp-ok-EMr" firstAttribute="top" secondItem="d0S-i5-7qh" secondAttribute="top" id="n3q-Tp-0nT"/>
+                                                            </constraints>
+                                                            <size key="customSize" width="375" height="85"/>
+                                                            <connections>
+                                                                <outlet property="bgScrollView" destination="zSp-ok-EMr" id="62K-Sc-Oiz"/>
+                                                            </connections>
+                                                        </collectionViewCell>
                                                     </cells>
                                                     <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityHeaderCollectionReusableView" id="X2P-Mf-Sdd" customClass="ActivityHeaderCollectionReusableView" customModule="CiPianAreaDemo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -559,16 +582,23 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠专区" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CVi-pW-WD6">
-                                                                        <rect key="frame" x="10" y="44" width="295" height="20"/>
+                                                                        <rect key="frame" x="10" y="44" width="80" height="20"/>
                                                                         <constraints>
+                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="9Us-WB-bJh"/>
                                                                             <constraint firstAttribute="height" constant="20" id="XYT-rv-j2W"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极速取餐 同享优惠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DT-bn-AwO">
+                                                                        <rect key="frame" x="90" y="44" width="93.5" height="20"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIS-Yn-9zi">
-                                                                        <rect key="frame" x="305" y="44" width="70" height="20"/>
+                                                                        <rect key="frame" x="320" y="44" width="55" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="Acf-Px-jjK"/>
                                                                         </constraints>
@@ -582,12 +612,15 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="CIS-Yn-9zi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2DT-bn-AwO" secondAttribute="trailing" id="JDc-5f-nLe"/>
                                                                     <constraint firstAttribute="bottom" secondItem="CIS-Yn-9zi" secondAttribute="bottom" id="NSg-zA-UHP"/>
                                                                     <constraint firstAttribute="trailing" secondItem="CIS-Yn-9zi" secondAttribute="trailing" id="Xal-jY-rcE"/>
                                                                     <constraint firstItem="CVi-pW-WD6" firstAttribute="leading" secondItem="R4c-b4-ZtF" secondAttribute="leading" constant="10" id="emr-Gw-fYw"/>
-                                                                    <constraint firstItem="CIS-Yn-9zi" firstAttribute="leading" secondItem="CVi-pW-WD6" secondAttribute="trailing" id="mFH-Wl-uik"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="2DT-bn-AwO" secondAttribute="bottom" id="gT4-8f-NPg"/>
                                                                     <constraint firstItem="CIS-Yn-9zi" firstAttribute="height" secondItem="CVi-pW-WD6" secondAttribute="height" id="pWh-oe-FNV"/>
+                                                                    <constraint firstItem="2DT-bn-AwO" firstAttribute="height" secondItem="CVi-pW-WD6" secondAttribute="height" id="pwf-Oj-jbR"/>
                                                                     <constraint firstAttribute="bottom" secondItem="CVi-pW-WD6" secondAttribute="bottom" id="sjV-fv-Ggu"/>
+                                                                    <constraint firstItem="2DT-bn-AwO" firstAttribute="leading" secondItem="CVi-pW-WD6" secondAttribute="trailing" id="zET-2Y-ve7"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -599,6 +632,7 @@
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="moreButton" destination="CIS-Yn-9zi" id="LAk-OQ-tUg"/>
+                                                            <outlet property="subTitleLabel" destination="2DT-bn-AwO" id="ICi-0M-nfo"/>
                                                             <outlet property="titleLabel" destination="CVi-pW-WD6" id="1iT-aD-e2g"/>
                                                         </connections>
                                                     </collectionReusableView>
@@ -639,8 +673,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="首页" id="fXt-6L-jOo">
                         <barButtonItem key="leftBarButtonItem" id="Lt1-gy-ysv"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="vgb-y3-FFA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7YL-yG-EEl">
+                        <barButtonItem key="rightBarButtonItem" id="vgb-y3-FFA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7YL-yG-EEl">
                                 <rect key="frame" x="276" y="5" width="83" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="刷新"/>

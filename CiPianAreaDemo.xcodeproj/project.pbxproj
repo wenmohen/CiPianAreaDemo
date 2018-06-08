@@ -16,6 +16,9 @@
 		3B77A41020C67B2900F84ACA /* CiPianAreaDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77A40F20C67B2900F84ACA /* CiPianAreaDemoUITests.swift */; };
 		3BB876D720C786C800B322A7 /* HomeActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB876D620C786C800B322A7 /* HomeActivityTableViewCell.swift */; };
 		3BB876E520C7E81800B322A7 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB876E420C7E81800B322A7 /* HomeTableViewCell.swift */; };
+		3BC886B220CA2C39002AC951 /* ActivityPickupShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC886B120CA2C39002AC951 /* ActivityPickupShopView.swift */; };
+		3BC886B620CA2DC6002AC951 /* ActivityPickupShopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BC886B520CA2DC6002AC951 /* ActivityPickupShopView.xib */; };
+		3BC886B820CA37B4002AC951 /* SNUIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC886B720CA37B4002AC951 /* SNUIViewExtension.swift */; };
 		C16A263320C9684F006ECA17 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16A263220C9684F006ECA17 /* FoodModel.swift */; };
 		C1789BBF20C827D9002ADA02 /* ActivityFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1789BBE20C827D9002ADA02 /* ActivityFoodView.swift */; };
 		C1789BC120C827E3002ADA02 /* ActivityFoodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1789BC020C827E3002ADA02 /* ActivityFoodView.xib */; };
@@ -54,6 +57,9 @@
 		3B77A41120C67B2900F84ACA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BB876D620C786C800B322A7 /* HomeActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityTableViewCell.swift; sourceTree = "<group>"; };
 		3BB876E420C7E81800B322A7 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		3BC886B120CA2C39002AC951 /* ActivityPickupShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPickupShopView.swift; sourceTree = "<group>"; };
+		3BC886B520CA2DC6002AC951 /* ActivityPickupShopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityPickupShopView.xib; sourceTree = "<group>"; };
+		3BC886B720CA37B4002AC951 /* SNUIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNUIViewExtension.swift; sourceTree = "<group>"; };
 		C16A263220C9684F006ECA17 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		C1789BBE20C827D9002ADA02 /* ActivityFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFoodView.swift; sourceTree = "<group>"; };
 		C1789BC020C827E3002ADA02 /* ActivityFoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityFoodView.xib; sourceTree = "<group>"; };
@@ -114,6 +120,9 @@
 				3BB876D620C786C800B322A7 /* HomeActivityTableViewCell.swift */,
 				C1789BBE20C827D9002ADA02 /* ActivityFoodView.swift */,
 				C1789BC020C827E3002ADA02 /* ActivityFoodView.xib */,
+				3BC886B120CA2C39002AC951 /* ActivityPickupShopView.swift */,
+				3BC886B520CA2DC6002AC951 /* ActivityPickupShopView.xib */,
+				3BC886B720CA37B4002AC951 /* SNUIViewExtension.swift */,
 				3B77A3F320C67B2700F84ACA /* Main.storyboard */,
 				3B77A3F620C67B2900F84ACA /* Assets.xcassets */,
 				3B77A3F820C67B2900F84ACA /* LaunchScreen.storyboard */,
@@ -245,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B77A3FA20C67B2900F84ACA /* LaunchScreen.storyboard in Resources */,
+				3BC886B620CA2DC6002AC951 /* ActivityPickupShopView.xib in Resources */,
 				C1789BC120C827E3002ADA02 /* ActivityFoodView.xib in Resources */,
 				3B77A3F720C67B2900F84ACA /* Assets.xcassets in Resources */,
 				3B77A3F520C67B2700F84ACA /* Main.storyboard in Resources */,
@@ -273,7 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B77A3F220C67B2700F84ACA /* ViewController.swift in Sources */,
+				3BC886B820CA37B4002AC951 /* SNUIViewExtension.swift in Sources */,
 				3B77A3F020C67B2700F84ACA /* AppDelegate.swift in Sources */,
+				3BC886B220CA2C39002AC951 /* ActivityPickupShopView.swift in Sources */,
 				C1789BBF20C827D9002ADA02 /* ActivityFoodView.swift in Sources */,
 				C16A263320C9684F006ECA17 /* FoodModel.swift in Sources */,
 				3BB876E520C7E81800B322A7 /* HomeTableViewCell.swift in Sources */,

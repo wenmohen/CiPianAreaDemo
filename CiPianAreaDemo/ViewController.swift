@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var allData2 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]]]
     var allData3 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"3","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]]]
     var allData4 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"4","items":["",""]],["type":"5","items":[""]]]
+    var allData5 = [["type":"1","items":["",""]],["type":"2","items":["","","",""]],["type":"4","items":["",""]],["type":"6","items":[""]],["type":"7","items":[""]]]
+
     var allData = [[String:Any]]()
     
     //优惠专区cell种类类型个数
@@ -52,7 +54,7 @@ extension ViewController {
     
     func loadData() {
         //瓷片区cell类型不确定，此随机显示
-        var data = [allData1,allData2,allData3,allData4]
+        var data = [allData1,allData2,allData3,allData4,allData5]
         let row = Int( Int (arc4random()) % data.count )
         allData = row > data.count - 1 ? data[0] : data[row]
         favorableZoneTypeNum = 0
@@ -127,10 +129,14 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
                     let itemHeight = itemWidth / 375 * 90
                     let lineNum = ToCalculateCellLineNum(items: items, column: 1)
                     height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum)
-                default:
+                case .otherRecommendedOne:
                     let itemHeight = CGFloat( 238 )
                     let lineNum = ToCalculateCellLineNum(items: items, column: 1)
                     height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum) + 35
+                case .goShopPickupOne:
+                    let itemHeight = CGFloat( 75 )
+                    let lineNum = ToCalculateCellLineNum(items: items, column: 1)
+                    height += itemHeight * CGFloat(lineNum) + 10 * CGFloat(lineNum) + 64
                 }
             }
             

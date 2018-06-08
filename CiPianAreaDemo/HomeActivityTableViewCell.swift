@@ -59,6 +59,7 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
                 return UICollectionReusableView()
             }
             let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
+            headView.subTitleLabel.text = ""
             
             switch cellType {
             case .favorableZoneTwo:
@@ -67,6 +68,9 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
                 headView.titleLabel.text = "为你优选"
             case  .optimizationSelectTwo:
                 headView.titleLabel.text = optimizationTypeNum == 1 ? "为你优选" : ""
+            case .goShopPickupOne:
+                headView.titleLabel.text = "到店自取"
+                headView.subTitleLabel.text = "极速取餐 同享优惠"
             default:
                 headView.titleLabel.text = ""
             }
@@ -83,16 +87,12 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         }
         let cellType = HomeActivityCellType.init(value: Int(type) ?? 1)
         switch cellType {
-        case .favorableZoneTwo:
+        case .favorableZoneTwo,.goShopPickupOne,.optimizationRecommendedTwo:
             return CGSize(width: width, height: 54)
         case .favorableZoneFour:
             return favorableZoneTypeNum == 1 ? CGSize(width: width, height: 54) : CGSize(width: 0, height: 0)
-        case .optimizationRecommendedTwo:
-            return CGSize(width: width, height: 54)
         case .optimizationSelectTwo:
             return optimizationTypeNum == 1 ? CGSize(width: width, height: 54) : CGSize(width: 0, height: 0)
-        case .otherAdvertOne:
-            return CGSize(width: 0, height: 0)
         default:
             return CGSize(width: 0, height: 0)
         }
@@ -113,8 +113,10 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         case .otherAdvertOne:
             return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        default:
+        case .otherRecommendedOne:
             return UIEdgeInsets(top: 35, left: 0, bottom: 0, right: 0)
+        default:
+            return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         }
     }
     
@@ -146,13 +148,16 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             let itemHeight = itemWidth / 375 * 90
             //            let itemHeight = CGFloat (90)
             return CGSize(width: itemWidth, height: itemHeight)
-        default:
+        case .otherRecommendedOne:
             let itemWidth = width
             let itemHeight = CGFloat (238)
             return CGSize(width: itemWidth, height: itemHeight)
+        default:
+            let itemWidth = width
+            let itemHeight = CGFloat (75)
+            return CGSize(width: itemWidth, height: itemHeight)
         }
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let items = allData[section]["items"] as? [String] else {
             return 0
@@ -178,45 +183,16 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
             return cellForActivitySelectTwo(indexPath: indexPath)
         case .otherAdvertOne:
             return cellForActivityOneAdvert(indexPath: indexPath)
-        default:
+        case .otherRecommendedOne:
             return cellForActivityOne(indexPath: indexPath)
+        default:
+            return cellForActivityOneGoShopPickup(indexPath: indexPath)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
-    /// 瓷片区-每行一栏
-    ///
-    /// - Parameter indexPath: indexPath
-    /// - Returns: cell
-    func cellForActivityOne(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneCollectionViewCell", for: indexPath) as? ActivityOneCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.bgImageView.image = #imageLiteral(resourceName: "icon_image16")
-        cell.shopImageView.image = #imageLiteral(resourceName: "icon_image17")
-        cell.shopImageView.layer.cornerRadius = cell.shopImageView.bounds.height / 2
-        cell.shopGrayBgView.layer.cornerRadius = 20
-        var images = [#imageLiteral(resourceName: "icon_image1"),#imageLiteral(resourceName: "icon_image2"),#imageLiteral(resourceName: "icon_image3")]
-        cell.foodView1.setupFoodModel(image: images[0])
-        cell.foodView2.setupFoodModel(image: images[1])
-        cell.foodView3.setupFoodModel(image: images[2])
-        return cell
-    }
-    
-    /// 瓷片区-每行一栏（广告）
-    ///
-    /// - Parameter indexPath: indexPath
-    /// - Returns: cell
-    func cellForActivityOneAdvert(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneAdvertCollectionViewCell", for: indexPath) as? ActivityOneAdvertCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.bgImageView.image = #imageLiteral(resourceName: "img_ Placeholder6")
-        return cell
-    }
-    
     
     /// 瓷片区-每行两栏（优惠专区）
     ///
@@ -270,36 +246,81 @@ extension HomeActivityTableViewCell: UICollectionViewDataSource,UICollectionView
         cell.shopSmallImageView.layer.masksToBounds = true
         return cell
     }
+    /// 瓷片区-每行一栏
+    ///
+    /// - Parameter indexPath: indexPath
+    /// - Returns: cell
+    func cellForActivityOne(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneCollectionViewCell", for: indexPath) as? ActivityOneCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.bgImageView.image = #imageLiteral(resourceName: "icon_image16")
+        cell.shopImageView.image = #imageLiteral(resourceName: "icon_image17")
+        cell.shopImageView.layer.cornerRadius = cell.shopImageView.bounds.height / 2
+        cell.shopGrayBgView.layer.cornerRadius = 20
+        var images = [FoodModel(foodName: "香汁排骨饭汤煲", foodImage: #imageLiteral(resourceName: "icon_image1"), price: "31.5"),
+                      FoodModel(foodName: "排骨拼鸡腿肉盖浇饭", foodImage: #imageLiteral(resourceName: "icon_image2"), price: "36.5"),
+                      FoodModel(foodName: "咖喱牛腩饭", foodImage: #imageLiteral(resourceName: "icon_image3"), price: "26.0")]
+        cell.foodView1.setupFoodModel(model: images[0])
+        cell.foodView2.setupFoodModel(model: images[1])
+        cell.foodView3.setupFoodModel(model: images[2])
+        return cell
+    }
+    
+    /// 瓷片区-每行一栏（广告）
+    ///
+    /// - Parameter indexPath: indexPath
+    /// - Returns: cell
+    func cellForActivityOneAdvert(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneAdvertCollectionViewCell", for: indexPath) as? ActivityOneAdvertCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.bgImageView.image = #imageLiteral(resourceName: "img_ Placeholder6")
+        return cell
+    }
+    /// 瓷片区-每行一栏（到店自取）
+    ///
+    /// - Parameter indexPath: indexPath
+    /// - Returns: cell
+    func cellForActivityOneGoShopPickup(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityOneGoShopPickupCollectionViewCell", for: indexPath) as? ActivityOneGoShopPickupCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.bgScrollView.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: cell.bounds.height)
+        let shopArr = [ShopModel.init(shopName: "内涵炸鸡", shopIconImage: #imageLiteral(resourceName: "icon_image17")),
+                       ShopModel.init(shopName: "嘎嘎香东北主题餐厅", shopIconImage: #imageLiteral(resourceName: "icon_image9")),
+                       ShopModel.init(shopName: "寂寞的鸭子", shopIconImage: #imageLiteral(resourceName: "icon_image10")),
+                       ShopModel.init(shopName: "壹号馆", shopIconImage: #imageLiteral(resourceName: "icon_image11")),
+                       ShopModel.init(shopName: "初选", shopIconImage: #imageLiteral(resourceName: "icon_image12")),
+                       ShopModel.init(shopName: "艾瑞林面包房", shopIconImage: #imageLiteral(resourceName: "icon_image13"))]
+        for i in 0..<shopArr.count {
+            var shopView = ActivityPickupShopView()
+            if let tempView = cell.bgScrollView.viewWithTag(1000 + i) as? ActivityPickupShopView {
+                shopView = tempView
+            }else {
+                shopView = ActivityPickupShopView().loadViewFromNib()
+                shopView.tag = 1000 + i
+                shopView.frame = CGRect(x:CGFloat(25 + i * (44 + 202) ), y: 0, width: 202, height: cell.bgScrollView.bounds.height)
+                cell.bgScrollView.addSubview(shopView)
+            }
+            shopView.didWholeShopButtonClosure = {[weak self] in
+                print("点击了商家\(i + 1)")
+            }
+            shopView.setupContent(model: shopArr[i])
+        }
+        let width =  50 + ( 202 + 44) * shopArr.count - 44
+        cell.bgScrollView.contentSize = CGSize(width: CGFloat(width), height: cell.bounds.height)
+        return cell
+    }
 }
-
 ///MARK:--collectionViewCell及组头
 /// 组头
 class ActivityHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
 }
 
-/// 瓷片区-每行一栏
-class ActivityOneCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var bgImageView: UIImageView!
-    
-    @IBOutlet weak var advertTagImageView: UIImageView!
-    @IBOutlet weak var goBuyButton: UIButton!
-    
-    @IBOutlet weak var shopGrayBgView: UIView!
-    @IBOutlet weak var shopImageView: UIImageView!
-    @IBOutlet weak var shopNameLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
-    
-    @IBOutlet weak var foodView1: ActivityFoodView!
-    @IBOutlet weak var foodView2: ActivityFoodView!
-    @IBOutlet weak var foodView3: ActivityFoodView!
-}
-/// 瓷片区-每行一栏（广告、内容暂定）
-class ActivityOneAdvertCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var bgImageView: UIImageView!
-}
 /// 瓷片区-每行两栏（优惠专区）
 class ActivityTwoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
@@ -327,4 +348,29 @@ class ActivitySelectTwoRecommendedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shopSmallImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
+}
+/// 瓷片区-每行一栏
+class ActivityOneCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var bgImageView: UIImageView!
+    
+    @IBOutlet weak var advertTagImageView: UIImageView!
+    @IBOutlet weak var goBuyButton: UIButton!
+    
+    @IBOutlet weak var shopGrayBgView: UIView!
+    @IBOutlet weak var shopImageView: UIImageView!
+    @IBOutlet weak var shopNameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    
+    @IBOutlet weak var foodView1: ActivityFoodView!
+    @IBOutlet weak var foodView2: ActivityFoodView!
+    @IBOutlet weak var foodView3: ActivityFoodView!
+}
+/// 瓷片区-每行一栏（广告、内容暂定）
+class ActivityOneAdvertCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var bgImageView: UIImageView!
+}
+/// 瓷片区-每行一栏  到店自取
+class ActivityOneGoShopPickupCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var bgScrollView: UIScrollView!
 }

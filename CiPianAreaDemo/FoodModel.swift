@@ -6,11 +6,31 @@
 //  Copyright © 2018年 ning. All rights reserved.
 //
 
-import Foundation
-class FootModel {
+import UIKit
+//商品
+struct FoodModel  {
+    var foodName: String?
+    var foodImage: UIImage = UIImage()
+    var price: String?
+    var originalPrice: String?
     
+    init(foodName: String,foodImage: UIImage,price: String) {
+        self.foodName = foodName
+        self.foodImage = foodImage
+        self.price = "￥" + price
+    }
 }
 
+//商铺
+struct ShopModel {
+    var shopName: String?
+    var shopIconImage: UIImage = UIImage()
+    var distance: String?
+    init(shopName: String,shopIconImage: UIImage) {
+        self.shopName = shopName
+        self.shopIconImage = shopIconImage
+    }
+}
 enum HomeActivityCellType: String {
     ///优惠专区
     //优惠专区：一行两栏
@@ -27,6 +47,9 @@ enum HomeActivityCellType: String {
     case otherAdvertOne = "5"
     //一行一栏，某个店热卖推荐
     case otherRecommendedOne = "6"
+    //到店自取
+    //一行一栏，可以横向滚动
+    case goShopPickupOne = "7"
     
     init(value: Int) {
         switch value {
@@ -40,8 +63,10 @@ enum HomeActivityCellType: String {
             self = .optimizationSelectTwo
         case 5:
             self = .otherAdvertOne
-        default:
+        case 6:
             self = .otherRecommendedOne
+        default:
+            self = .goShopPickupOne
         }
     }
     

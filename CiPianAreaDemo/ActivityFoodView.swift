@@ -38,17 +38,19 @@ extension ActivityFoodView {
         self.myView.frame = bounds
         self.myView.frame.size.width = (UIScreen.main.bounds.width - 20) / 3
         addSubview(self.myView)
-        setupView()
+//        setupView()
     }
     
-    func setupView() {
-        foodImageView.layer.cornerRadius = foodImageView.bounds.width / 2
-        hotRecommendedLabel.layer.borderColor = UIColor.orange.cgColor
-        hotRecommendedLabel.layer.borderWidth = 1.5
-    }
+//    func setupView() {
+//        foodImageView.layer.cornerRadius = foodImageView.bounds.width / 2
+//        hotRecommendedLabel.layer.borderColor = UIColor.orange.cgColor
+//        hotRecommendedLabel.layer.borderWidth = 1.5
+//    }
     
-    func setupFoodModel(image: UIImage) {
+    func setupFoodModel(model: FoodModel) {
         loadViewFromNib()
-        foodImageView.image = image
+        foodImageView.image = model.foodImage
+        foodNameLabel.text = model.foodName
+        foodPriceLabel.text = model.price
     }
 }
