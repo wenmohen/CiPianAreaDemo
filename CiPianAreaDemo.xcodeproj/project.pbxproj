@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B6ADEA320DBA34300051B12 /* CeramicsAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6ADEA220DBA34300051B12 /* CeramicsAreaTableViewCell.swift */; };
+		3B6ADEA520DBA34E00051B12 /* CeramicsAreaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6ADEA420DBA34D00051B12 /* CeramicsAreaModel.swift */; };
+		3B6ADEA720DBA36100051B12 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6ADEA620DBA36100051B12 /* HomeViewController.swift */; };
+		3B6ADEA920DBA54200051B12 /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6ADEA820DBA54100051B12 /* NSObjectExtension.swift */; };
 		3B77A3F020C67B2700F84ACA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77A3EF20C67B2700F84ACA /* AppDelegate.swift */; };
 		3B77A3F220C67B2700F84ACA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77A3F120C67B2700F84ACA /* ViewController.swift */; };
 		3B77A3F520C67B2700F84ACA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B77A3F320C67B2700F84ACA /* Main.storyboard */; };
@@ -42,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B6ADEA220DBA34300051B12 /* CeramicsAreaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CeramicsAreaTableViewCell.swift; sourceTree = "<group>"; };
+		3B6ADEA420DBA34D00051B12 /* CeramicsAreaModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CeramicsAreaModel.swift; sourceTree = "<group>"; };
+		3B6ADEA620DBA36100051B12 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3B6ADEA820DBA54100051B12 /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		3B77A3EC20C67B2700F84ACA /* CiPianAreaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CiPianAreaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B77A3EF20C67B2700F84ACA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B77A3F120C67B2700F84ACA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +123,7 @@
 			children = (
 				3B77A3EF20C67B2700F84ACA /* AppDelegate.swift */,
 				3B77A3F120C67B2700F84ACA /* ViewController.swift */,
+				3B6ADEA620DBA36100051B12 /* HomeViewController.swift */,
 				C16A263220C9684F006ECA17 /* FoodModel.swift */,
 				3BB876E420C7E81800B322A7 /* HomeTableViewCell.swift */,
 				3BB876D620C786C800B322A7 /* HomeActivityTableViewCell.swift */,
@@ -123,6 +132,9 @@
 				3BC886B120CA2C39002AC951 /* ActivityPickupShopView.swift */,
 				3BC886B520CA2DC6002AC951 /* ActivityPickupShopView.xib */,
 				3BC886B720CA37B4002AC951 /* SNUIViewExtension.swift */,
+				3B6ADEA220DBA34300051B12 /* CeramicsAreaTableViewCell.swift */,
+				3B6ADEA420DBA34D00051B12 /* CeramicsAreaModel.swift */,
+				3B6ADEA820DBA54100051B12 /* NSObjectExtension.swift */,
 				3B77A3F320C67B2700F84ACA /* Main.storyboard */,
 				3B77A3F620C67B2900F84ACA /* Assets.xcassets */,
 				3B77A3F820C67B2900F84ACA /* LaunchScreen.storyboard */,
@@ -285,9 +297,13 @@
 				3B77A3F220C67B2700F84ACA /* ViewController.swift in Sources */,
 				3BC886B820CA37B4002AC951 /* SNUIViewExtension.swift in Sources */,
 				3B77A3F020C67B2700F84ACA /* AppDelegate.swift in Sources */,
+				3B6ADEA320DBA34300051B12 /* CeramicsAreaTableViewCell.swift in Sources */,
 				3BC886B220CA2C39002AC951 /* ActivityPickupShopView.swift in Sources */,
 				C1789BBF20C827D9002ADA02 /* ActivityFoodView.swift in Sources */,
 				C16A263320C9684F006ECA17 /* FoodModel.swift in Sources */,
+				3B6ADEA920DBA54200051B12 /* NSObjectExtension.swift in Sources */,
+				3B6ADEA720DBA36100051B12 /* HomeViewController.swift in Sources */,
+				3B6ADEA520DBA34E00051B12 /* CeramicsAreaModel.swift in Sources */,
 				3BB876E520C7E81800B322A7 /* HomeTableViewCell.swift in Sources */,
 				3BB876D720C786C800B322A7 /* HomeActivityTableViewCell.swift in Sources */,
 			);
